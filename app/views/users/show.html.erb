@@ -1,0 +1,22 @@
+<div class="card text-center mt-4">
+  <div class="card-header">
+    user : <%= @user.name %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @user.email %></h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <% if policy(@user).update? %>
+      <%= link_to "Edit Acount", edit_user_registration_path, class: "btn btn-primary" %>
+      <%= button_to "Delete my Acount", user_registration_path,method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger" ,form:{class: "d-inline"}%>
+      <% else %>
+      <p class="fst-italic text-danger">looks like its not your profile sry !</p>
+    <% end %>
+  </div>
+  <div class="card-footer text-muted">
+
+    <span class="me-4"> <em>created :</em> <%= time_ago_in_words(@user.created_at) %></span>
+    <span> <em>last updated : </em><%= time_ago_in_words(@user.updated_at) %></span>
+
+
+  </div>
+</div>
