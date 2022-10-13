@@ -72,3 +72,5 @@ group :test do
 end
 gem 'devise'
 gem "pundit", "~> 2.2"
+
+gem "faker", "~> 2.23"

@@ -1,0 +1,26 @@
+<%= form_with model: @post do |form| %>
+  <div class="mb-3 col-4">
+    <%= form.label :title, class: "form-label" %><br>
+    <%= form.text_field :title, class: "form-control" %>
+    <% @post.errors.full_messages_for(:title).each do |message| %>
+      <small class="text-danger"><%= message %></small>
+    <% end %>
+  </div>
+
+  <div class="mb-3 col-4 ">
+    <%= form.label :body, class: "form-label" %><br>
+    <%= form.text_area :body, class: "form-control" %>
+    <% if @post.errors.full_messages_for(:body) %>
+      <ul class="list-group offset-1">
+        <% @post.errors.full_messages_for(:body).each do |message| %>
+          <li class="text-danger"><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="offset-1">
+    <%= form.submit submit_text, :class => "btn btn-primary mb-3" %>
+    <%= link_to "Go back" , posts_path , class: "btn btn-secondary mb-3" %>
+  </div>
+<% end %>

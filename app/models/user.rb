@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :posts,dependent: :destroy
   attr_writer :login
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates_format_of :name, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true,message: 'pls enter a valid name '
+
   validates :email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'pls enter a valid email address' }
 
   def login

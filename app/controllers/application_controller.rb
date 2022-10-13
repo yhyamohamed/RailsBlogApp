@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
 
     if policy_name == "user_policy"
         flash[:alert] = "sry ! U cant #{exception.query} this user "
+    elsif policy_name == "post_policy"
+      flash[:alert] = "sry ! U cant #{exception.query} this post "
     else
       flash[:alert] = "You are not authorized to perform this action."
     end

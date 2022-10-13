@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'posts/index'
+
 
   root "about#index"
+  resources :posts
 
   get "/user/:id", to: "users#show", as: "user_profile"
 
