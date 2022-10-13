@@ -2,21 +2,30 @@
   <div class="card-header">
     user : <%= @user.name %>
   </div>
-  <div class="card-body">
-    <h5 class="card-title"><%= @user.email %></h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <% if policy(@user).update? %>
-      <%= link_to "Edit Acount", edit_user_registration_path, class: "btn btn-primary" %>
-      <%= button_to "Delete my Acount", user_registration_path,method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger" ,form:{class: "d-inline"}%>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <% if @user.avatar.present? %>
+        <img src="<%= @user.avatar %>" class="img-fluid rounded-start" alt="...">
       <% else %>
-      <p class="fst-italic text-danger">looks like its not your profile sry !</p>
-    <% end %>
+        <img src="/uploads/user/avatar/default.jpg" class="img-fluid rounded-start" alt="..." style="max-height: 300px;">
+      <% end %>
+
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.email %></h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <% if policy(@user).update? %>
+          <%= link_to "Edit Acount", edit_user_registration_path, class: "btn btn-primary" %>
+          <%= button_to "Delete my Acount", user_registration_path, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger", form: { class: "d-inline" } %>
+        <% else %>
+          <p class="fst-italic text-danger">looks like its not your profile sry !</p>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="card-footer text-muted">
-
     <span class="me-4"> <em>created :</em> <%= time_ago_in_words(@user.created_at) %></span>
     <span> <em>last updated : </em><%= time_ago_in_words(@user.updated_at) %></span>
-
-
   </div>
 </div>
