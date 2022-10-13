@@ -6,6 +6,14 @@
       <small class="text-danger"><%= message %></small>
     <% end %>
   </div>
+  <div class="mb-3 col-4">
+    <%= :category.to_s %>
+    <%= form.label :category, class: "form-label" %><br>
+    <%= form.collection_select :category_id, @category, :id, :name, { :prompt => "select a category"  },{:class => "form-select"} %>
+    <%# @post.errors.full_messages_for(:title).each do |message| %>
+<!--      <small class="text-danger"><%#= message %></small>-->
+    <%# end %>
+  </div>
 
   <div class="mb-3 col-4 ">
     <%= form.label :body, class: "form-label" %><br>
@@ -21,6 +29,6 @@
 
   <div class="offset-1">
     <%= form.submit submit_text, :class => "btn btn-primary mb-3" %>
-    <%= link_to "Go back" , posts_path , class: "btn btn-secondary mb-3" %>
+    <%= link_to "Go back", posts_path, class: "btn btn-secondary mb-3" %>
   </div>
 <% end %>

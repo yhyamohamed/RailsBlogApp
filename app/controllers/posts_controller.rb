@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :populate_post, only: %i[edit update destroy show]
+  before_action :populate_category, only: %i[new edit update]
 
   def index
 
@@ -32,7 +33,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to posts_path, notice: "post updated !"
+      redirect_to @post, notice: "post updated !"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -45,10 +46,13 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body,:category_id)
   end
 
   def populate_post
     @post = Post.find(params[:id])
+  end
+  def populate_category
+    @category = Category.all
   end
 end

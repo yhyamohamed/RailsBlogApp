@@ -5,10 +5,16 @@
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %></h5>
     <p class="card-text"><%= @post.body %></p>
-    <% if current_user %>
-      <%= link_to_if(policy(@post).update?, "Edit", edit_post_path(@post), class: "btn btn-sm btn-success ") %>
-      <%= button_to "Delete", post_path(@post), method: :delete, :disabled => !(policy(@post).delete?), data: { confirm: "You sure?" }, class: "btn btn-sm btn-danger", form: { class: "d-inline" } %>
-    <% end %>
+    <span class="me-4"> <em>category :</em>  <%= @post.category.name %></span>
+    <br/>
+    <div class="mt-2">
+      <% if current_user %>
+        <%= link_to_if(policy(@post).update?, "Edit", edit_post_path(@post), class: "btn btn-sm btn-success ") %>
+        <%= button_to "Delete", post_path(@post), method: :delete, :disabled => !(policy(@post).delete?), data: { confirm: "You sure?" }, class: "btn btn-sm btn-danger", form: { class: "d-inline" } %>
+      <% end %>
+
+    </div>
+
   </div>
   <div class="card-footer text-muted">
 
