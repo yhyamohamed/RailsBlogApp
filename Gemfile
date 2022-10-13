@@ -76,3 +76,5 @@ gem "pundit", "~> 2.2"
 gem "faker", "~> 2.23"
 
 gem "carrierwave", "~> 2.2"
+
+gem "will_paginate", "~> 3.3"

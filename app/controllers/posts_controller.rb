@@ -3,7 +3,9 @@ class PostsController < ApplicationController
   before_action :populate_post, only: %i[edit update destroy show]
 
   def index
-    @posts = Post.all
+
+    @posts = Post.paginate(page: params[:page], per_page: 5)
+    # @posts = Post.all
   end
 
   def new
