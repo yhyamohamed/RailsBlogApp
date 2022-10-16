@@ -24,6 +24,7 @@
                   <% post.tags.each do |tag| %>
                     <span class="badge rounded-pill bg-warning text-dark mb-2"><%= tag.name %></span>
                   <% end %>
+                  <br/>
                   <% if current_user %>
                     <% if policy(post).update? %>
                       <%= link_to "Edit", edit_post_path(post), class: "btn btn-sm btn-success " %>

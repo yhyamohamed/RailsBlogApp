@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :populate_post, only: %i[edit update destroy show]
   before_action :populate_category, only: %i[new edit update]
+  before_action :populate_tags, only: %i[new edit update]
 
   def index
     @posts = Post.paginate(page: params[:page], per_page: 5)
@@ -44,7 +45,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body,:category_id)
+    params.require(:post).permit(:title, :body,:category_id,:tag_ids  => [] )
   end
 
   def populate_post
@@ -52,5 +53,8 @@ class PostsController < ApplicationController
   end
   def populate_category
     @category = Category.all
+  end
+  def populate_tags
+    @tags = Tag.all
   end
 end
