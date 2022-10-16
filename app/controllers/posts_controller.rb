@@ -5,7 +5,10 @@ class PostsController < ApplicationController
   before_action :populate_tags, only: %i[new edit update]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 5)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.includes(:category).paginate(page: params[:page], per_page: 5)
+
+    # @posts = Post
     # @posts = Post.all
   end
 
@@ -26,6 +29,7 @@ class PostsController < ApplicationController
 
   def show
   end
+
   def edit
 
   end
@@ -37,23 +41,27 @@ class PostsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
   def destroy
     authorize @post, :delete?
     @post.destroy
     redirect_to posts_path, notice: "post deleted !"
   end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :body,:category_id,:tag_ids  => [] )
+    params.require(:post).permit(:title, :body, :category_id, :tag_ids => [])
   end
 
   def populate_post
     @post = Post.find(params[:id])
   end
+
   def populate_category
     @category = Category.all
   end
+
   def populate_tags
     @tags = Tag.all
   end
