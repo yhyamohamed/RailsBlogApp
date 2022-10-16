@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :populate_category, only: %i[new edit update]
 
   def index
-
     @posts = Post.paginate(page: params[:page], per_page: 5)
     # @posts = Post.all
   end
@@ -25,7 +24,6 @@ class PostsController < ApplicationController
   end
 
   def show
-
   end
   def edit
 

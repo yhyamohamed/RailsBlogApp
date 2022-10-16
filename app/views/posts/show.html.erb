@@ -5,7 +5,12 @@
   <div class="card-body">
     <h5 class="card-title"><%= @post.title %></h5>
     <p class="card-text"><%= @post.body %></p>
-    <span class="me-4"> <em>category :</em>  <%= @post.category.name %></span>
+    <span class="me-4"> <em>category :</em>  <%= @post.category.name %></span><br/>
+    <span class="me-4"> <em>tags :</em>
+      <% @post.tags.each do |tag| %>
+        <span class="badge rounded-pill bg-warning text-dark mb-2"><%= tag.name %></span>
+      <% end %>
+    </span>
     <br/>
     <div class="mt-2">
       <% if current_user %>
